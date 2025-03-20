@@ -66,7 +66,6 @@ class HomePageComponent {
         const selectedPokemon = this.pokemons[index]
         this.storageService.save(selectedPokemon);
     }
-
 }
 
 export default HomePageComponent;

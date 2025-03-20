@@ -20,7 +20,6 @@ class StorageService {
             starredPokemons.push(pokemon)
             localStorage.setItem('starred', JSON.stringify(starredPokemons))
         }
-
         
     }
 
