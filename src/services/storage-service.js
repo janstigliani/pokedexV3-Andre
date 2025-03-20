@@ -1,11 +1,11 @@
 class StorageService {
 
 
-    constructor() {
-
-    }
+    constructor() {}
 
     save(pokemon){
+
+        console.log(pokemon);
 
         const starredPokemonString = localStorage.getItem('starred')
 

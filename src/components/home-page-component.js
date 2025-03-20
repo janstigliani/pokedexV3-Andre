@@ -1,3 +1,6 @@
+import PokemonCardComponent from "./pokemon-card-component"
+
+
 class HomePageComponent {
 
 
@@ -14,7 +17,7 @@ class HomePageComponent {
         prevBtn.addEventListener('click', () => this.previousPressed())
 
         this.pokemons = await this.pokeService.getPokemonData();
-        this.render(this.pokemons)
+        this.render(this.pokemons);
     }
     
 
@@ -25,27 +28,12 @@ class HomePageComponent {
         for (let i = 0; i < pokemons.length; i++) {
 
             const pokemon = pokemons[i]
+
+            const cardComponent = new PokemonCardComponent(pokemon, this.storageService);
+
+            const card = cardComponent.render();
             
-            const pokeContainer = document.createElement('a');
-            pokeContainer.href = './detail.html?id=' + pokemon.id;
-
-            const html = `
-                <img src="${pokemon.sprites.front_default}" alt="">
-                <h3>${pokemon.name}</h3>
-            `
-            pokeContainer.innerHTML = html;
-
-            const saveBtn = document.createElement('button');
-
-            saveBtn.addEventListener('click', (event) => this.savePokemon(event, i))
-
-            const node = document.createTextNode('salva');
-
-            saveBtn.appendChild(node);
-
-            pokeContainer.appendChild(saveBtn);
-
-            mainContainer.appendChild(pokeContainer);
+            mainContainer.appendChild(card);
         }
     }
 
@@ -59,12 +47,6 @@ class HomePageComponent {
         this.pokeService.previousPage();
         this.pokemons = await this.pokeService.getPokemonData();
         this.render(this.pokemons)
-    }
-
-    savePokemon(event, index){
-        event.preventDefault();
-        const selectedPokemon = this.pokemons[index]
-        this.storageService.save(selectedPokemon);
     }
 
 }

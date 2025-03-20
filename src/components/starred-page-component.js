@@ -1,3 +1,5 @@
+import PokemonCardComponent from "./pokemon-card-component";
+
 class StarredPageComponent {
 
 
@@ -20,17 +22,13 @@ class StarredPageComponent {
         for (let i = 0; i < pokemons.length; i++) {
 
             const pokemon = pokemons[i]
+
+            const cardComponent = new PokemonCardComponent(pokemon, this.storageService, false);
+
+            const card = cardComponent.render();
             
-            const pokeContainer = document.createElement('a');
-            pokeContainer.href = './detail.html?id=' + pokemon.id;
-
-            const html = `
-                <img src="${pokemon.sprites.front_default}" alt="">
-                <h3>${pokemon.name}</h3>
-            `
-            pokeContainer.innerHTML = html;
-
-            mainContainer.appendChild(pokeContainer);
+            mainContainer.appendChild(card);
+            
         }
     }
 
